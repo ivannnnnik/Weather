@@ -2,15 +2,6 @@ import aiosqlite
 
 
 class User:
-    """
-   Получает пользователя по идентификатору.
-   :param user_id: Идентификатор пользователя.
-   :type user_id: int
-   :return: Кортеж с данными пользователя (id, username, balance).
-   :rtype: tuple
-   :raises ValueError: Если пользователь с указанным идентификатором не найден.
-   """
-
     @staticmethod
     async def get_user_by_id(user_id: int):
         async with aiosqlite.connect('users.db') as db:
