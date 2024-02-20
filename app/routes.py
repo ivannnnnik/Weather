@@ -1,5 +1,3 @@
-import asyncio
-
 from flask import request, abort, jsonify, Response
 
 from app import app
