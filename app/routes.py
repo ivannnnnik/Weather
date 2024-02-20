@@ -14,21 +14,21 @@ async def update_balance_task(user_id: int, city: str):
         new_balance = max(0, user[2] + round(temperature, 2))
         await User.update_balance(user_id, new_balance)
     except ValueError as e:
-        abort(404, str(e))
+        await abort(404, str(e))
 
 
 @app.route('/update_user_balance', methods=['POST'])
-def update_user_balance():
+async def update_user_balance():
     try:
         user_id = request.json.get('userId')
         city = request.json.get('city')
         if not user_id or not city:
-            abort(400, "userId and city must be provided")
-        asyncio.run(update_balance_task(int(user_id), city))
+            await abort(400, "userId and city must be provided")
+        await update_balance_task(int(user_id), city)
         return Response(status=204)
 
     except ValueError as e:
-        abort(404, str(e))
+        await abort(404, str(e))
 
 
 @app.errorhandler(404)
